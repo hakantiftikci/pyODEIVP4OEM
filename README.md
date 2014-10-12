@@ -1,8 +1,4 @@
 # Summary
 
 * implementation of ODE-IVP solvers targeting Output Error parameter estimation method
-* 0.1
-
-
-
-
+* version 0.1
