@@ -1,0 +1,3866 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{xcolor}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "commentstyle={\color{green!60!gray}},frame=single,keywordstyle={\color{blue}}"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={command.com},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+template
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+state derivative model is set to be
+\begin_inset Formula 
+\[
+\dot{\mathbf{x}}_{n_{x}\times1}=\mathbf{f}\left(t,\mathbf{x}^{n_{x}\times1},\mathbf{u}^{n_{u}\times1},\mathbf{p}_{x}^{n_{px}\times1}\right)
+\]
+
+\end_inset
+
+corresponding signature in FORTRAN is selected as
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={[90]Fortran},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+subroutine f(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    implicit none
+\end_layout
+
+\begin_layout Plain Layout
+
+    real, intent(in) :: t    
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+    integer, intent(in) :: nx,nu,npx
+\end_layout
+
+\begin_layout Plain Layout
+
+    real, intent(in), dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+    real, intent(in), dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+    real, intent(out), dimension(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx(1) = ...
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx(2) = ...
+\end_layout
+
+\begin_layout Plain Layout
+
+end subroutine f
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+input in functional form is set to be
+\begin_inset Formula 
+\[
+\mathbf{u}^{n_{u}\times1}=\mathbf{g}\left(t,\mathbf{x}^{n_{x}\times1},\mathbf{p}_{u}^{n_{pu}\times1}\right)
+\]
+
+\end_inset
+
+call fu(t,x,u,pu,nx,nu,npu)
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={[90]Fortran},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+subroutine 
+\end_layout
+
+\begin_layout Plain Layout
+
+end subroutine 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+output function model is set to be
+\begin_inset Formula 
+\[
+\mathbf{y}^{n_{y}\times1}=\mathbf{h}\left(t,\mathbf{x}^{n_{x}\times1},\mathbf{dx}^{n_{x}\times1},\mathbf{u}^{n_{u}\times1},\mathbf{p}_{x}^{n_{px}\times1},\mathbf{p}_{u}^{n_{pu}\times1},\mathbf{p}_{y}^{n_{y}\times1}\right)
+\]
+
+\end_inset
+
+call fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy)
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={[90]Fortran},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+subroutine 
+\end_layout
+
+\begin_layout Plain Layout
+
+end subroutine 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={[90]Fortran},tabsize=4"
+inline false
+status collapsed
+
+\begin_layout Plain Layout
+
+\emph on
+!# -*- coding: utf-8 -*-
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!Created on Fri Dec 06 22:06:59 2013
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!@author: hakan
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!"""
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+subroutine fdxsample1(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    implicit none
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in) :: t    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer, intent(in) :: nx,nu,npx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    dx(1) = px(1)*x(1) + px(2)*x(2) + px(3)*x(1)*x(2) + px(7)*u(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    dx(2) = px(4)*x(1) + px(5)*x(2) + px(6)*(sin(x(1))+cos(x(2))) + px(8)*u(2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+end subroutine fdxsample1
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+subroutine fdxsample2(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    implicit none
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in) :: t    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer, intent(in) :: nx,nu,npx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real :: m,c,k
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    m = px(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    c = px(2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    k = px(3)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    dx(1) = x(2)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    dx(2) = (u(1)-c*x(2)-k*x(1))/m
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+end subroutine fdxsample2
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+subroutine stateDerivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer, intent(in) :: nx,nu,npx,npu
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nx) :: x    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npu) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    external fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    external fu
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+end subroutine stateDerivative
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!subroutine EulerIntegration(fdx,fu,fy,x0,t0,t1,dt,px,pu,py,nx,nu,ny,npx,npu,npy
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+subroutine EulerIntegration(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,
+nt)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    implicit none
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer, intent(in) :: nx,nu,ny,npx,npu,npy,nt !,nstore
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nx) :: x0
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nt)  :: tv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npu) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npy) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nt, nx) :: xv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nt, ny) :: yv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    external fdx,fu,fy,stateDerivative
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer i
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real t,dt
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nx) :: x,dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(ny) :: y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    t = tv(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    x = x0   
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    xv(1,:) = x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    yv(1,:) = y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !do while (t<t1)        
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    do i=1,(nt-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call stateDerivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        dt = tv(i+1)-tv(i)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        x = x + dt*dx
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        t = t + dt
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !if (i<nt) then
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        xv(1+i,:) = x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        yv(1+i,:) = y
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !end if
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !print *,t,x,y
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !flush(6)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    end do
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+end subroutine EulerIntegration 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+!subroutine RK4(fdx,fu,fy,x0,t0,t1,dt,px,pu,py,nx,nu,ny,npx,npu,npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+subroutine RK4(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    implicit none
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer, intent(in) :: nx,nu,ny,npx,npu,npy,nt
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nx) :: x0
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(nt)  :: tv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npx) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npu) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(in), dimension(npy) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nt, nx) :: xv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, intent(out), dimension(nt, ny) :: yv
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    external fdx,fu,fy,stateDerivative
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(4) :: c 
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(4) :: b
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !real, dimension(4,4) :: a = (/ (/0.0, 0.0, 0.0, 0.0/) ,  (/1.0/2.0,0.0,0.0,0.0/)
+ , (/0.0,1.0/2.0,0.0,0.0/) , (/0.0,0.0,1.0,0.0/) /)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(4,4) :: a 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nx,4) :: k
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nx) :: xstage
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    integer i,j,m
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !integer istore
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real t,dt
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nx) :: x,dx,deltax
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    real, dimension(ny) :: y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !a = reshape( (/0.0, 0.0, 0.0, 0.0 , 1.0/2.0,0.0,0.0,0.0 , 0.0,1.0/2.0,0.0,0.0 , 0.0,0.0,1.0,
+0.0/), (/4,4/))
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    ! k(i) = f(t+c(i)*h, y(n)+sum(a(i,j)*k(j)))
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    ! y(n+1) = y(n) + h*sum(b(i)*k(i))
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    a(1,:) = (/0.0, 0.0, 0.0, 0.0/) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    a(2,:) = (/1.0/2.0,0.0,0.0,0.0/) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    a(3,:) = (/0.0,1.0/2.0,0.0,0.0/) 
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    a(4,:) = (/0.0,0.0,1.0,0.0/)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    b = (/ 1.0/6.0, 1.0/3.0, 1.0/3.0, 1.0/6.0 /)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    c = (/ 0.0, 1.0/2.0, 1.0/2.0, 1.0 /)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !print *,"a=",a
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !print *,"b=",b
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !print *,"c=",c
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    t = tv(1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    x = x0
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    call fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    xv(1,:) = x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    yv(1,:) = y
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    !do while (t<t1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    do m=1,(nt-1)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        dt = tv(i+1)-tv(i)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        deltax = 0
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        do i=1,4
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            xstage = x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            do j=1,i-1
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+                xstage = xstage+dt*a(i,j)*k(:,j)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            end do
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            call stateDerivative(t+c(i)*dt,xstage,k(:,i),fu,fdx,px,pu,nx,nu,npx,
+npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            !subroutine stateDerivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+            deltax = deltax + dt*b(i)*k(:,i)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        end do
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        x = x + deltax
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        t = t + dt
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fu(t,x,u,pu,nx,nu,npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fdx(t,x,u,px,dx,nx,nu,npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        call fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+       !if (istore<=nstore) then
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        xv(1+m,:) = x
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        yv(1+m,:) = y
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !end if
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !print *,t,x,y
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+        !flush(6)
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+    end do
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+end subroutine RK4 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+calling f2py to generate interfacefile
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+f2py.py ODEIVP.f90 -m pyODEIVPstage0 -h pyODEIVPstage0.pyf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+generates following screen dump
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language={command.com},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+G:
+\backslash
+ONGOINGWORKS
+\backslash
+ACTIVE
+\backslash
+F2PY
+\backslash
+27Aralik2013_1Ocak2014
+\backslash
+f2py_examples
+\backslash
+ex4_ode_parametric_reviseClean4_gitRevise>
+\end_layout
+
+\begin_layout Plain Layout
+
+f2py.py ODEIVP.f90 -m pyODEIVPstage0 -h pyODEIVPstage0.pyf
+\end_layout
+
+\begin_layout Plain Layout
+
+Reading fortran codes...
+\end_layout
+
+\begin_layout Plain Layout
+
+        Reading file 'ODEIVP.f90' (format:free)
+\end_layout
+
+\begin_layout Plain Layout
+
+Post-processing...
+\end_layout
+
+\begin_layout Plain Layout
+
+        Block: pyODEIVP
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Block: fdxsample1
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Block: fdxsample2
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Block: statederivative
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fu
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Block: eulerintegration
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fu
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fy
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Block: rk4
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fu
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+                                        Block: fy
+\end_layout
+
+\begin_layout Plain Layout
+
+Post-processing (stage 2)...
+\end_layout
+
+\begin_layout Plain Layout
+
+Saving signatures to file ".
+\backslash
+pyODEIVP.pyf"
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+generated signature file pyODEIVPstage0.pyf given below
+\begin_inset listings
+lstparams "basicstyle={\scriptsize\ttfamily},breaklines=true,language=Fortran,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+!    -*- f90 -*-
+\end_layout
+
+\begin_layout Plain Layout
+
+! Note: the context of this file is case sensitive.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+python module statederivative__user__routines 
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface statederivative_user_interface 
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:statederi
+vative:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(out),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:statederivati
+ve:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fu
+\end_layout
+
+\begin_layout Plain Layout
+
+    end interface statederivative_user_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+end python module statederivative__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+python module eulerintegration__user__routines 
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface eulerintegration_user_interface 
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:eulerinte
+gration:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:eulerintegrat
+ion:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fu
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy) ! in :pyODEIVP:O
+DEIVP.f90:eulerintegration:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(ny) :: y
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npy),intent(in) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) ::
+ ny=len(y)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(py)>=npy),depend(py)
+ :: npy=len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fy
+\end_layout
+
+\begin_layout Plain Layout
+
+    end interface eulerintegration_user_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+end python module eulerintegration__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+python module rk4__user__routines 
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface rk4_user_interface 
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:rk4:unkno
+wn_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:rk4:unknown_i
+nterface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fu
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy) ! in :pyODEIVP:O
+DEIVP.f90:rk4:unknown_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+            real :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(ny) :: y
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npy),intent(in) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) ::
+ ny=len(y)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(py)>=npy),depend(py)
+ :: npy=len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fy
+\end_layout
+
+\begin_layout Plain Layout
+
+    end interface rk4_user_interface
+\end_layout
+
+\begin_layout Plain Layout
+
+end python module rk4__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+python module pyODEIVP ! in 
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface  ! in :pyODEIVP
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fdxsample1(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90
+\end_layout
+
+\begin_layout Plain Layout
+
+            real intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu),intent(in) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(out),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fdxsample1
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine fdxsample2(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90
+\end_layout
+
+\begin_layout Plain Layout
+
+            real intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nu),intent(in) :: u
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(out),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) ::
+ nu=len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine fdxsample2
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine statederivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu) !
+ in :pyODEIVP:ODEIVP.f90
+\end_layout
+
+\begin_layout Plain Layout
+
+            use statederivative__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+            real intent(in) :: t
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(out),depend(nx) :: dx
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fu
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) ::
+ nx=len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer intent(in) :: nu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine statederivative
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine eulerintegration(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,
+npu,npy,nt) ! in :pyODEIVP:ODEIVP.f90
+\end_layout
+
+\begin_layout Plain Layout
+
+            use eulerintegration__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fu
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fy
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x0
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt),intent(in) :: tv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npy),intent(in) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) ::
+ nx=len(x0)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer intent(in) :: nu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer intent(in) :: ny
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(py)>=npy),depend(py)
+ :: npy=len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) ::
+ nt=len(tv)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine eulerintegration
+\end_layout
+
+\begin_layout Plain Layout
+
+        subroutine rk4(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt)
+ ! in :pyODEIVP:ODEIVP.f90
+\end_layout
+
+\begin_layout Plain Layout
+
+            use rk4__user__routines
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fdx
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fu
+\end_layout
+
+\begin_layout Plain Layout
+
+            external fy
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nx),intent(in) :: x0
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt),intent(in) :: tv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npx),intent(in) :: px
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npu),intent(in) :: pu
+\end_layout
+
+\begin_layout Plain Layout
+
+            real dimension(npy),intent(in) :: py
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) ::
+ nx=len(x0)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer intent(in) :: nu
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer intent(in) :: ny
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(px)>=npx),depend(px)
+ :: npx=len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu)
+ :: npu=len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(py)>=npy),depend(py)
+ :: npy=len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) ::
+ nt=len(tv)
+\end_layout
+
+\begin_layout Plain Layout
+
+        end subroutine rk4
+\end_layout
+
+\begin_layout Plain Layout
+
+    end interface 
+\end_layout
+
+\begin_layout Plain Layout
+
+end python module pyODEIVP
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+! This file was auto-generated with f2py (version:2).
+\end_layout
+
+\begin_layout Plain Layout
+
+! See http://cens.ioc.ee/projects/f2py2e/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+this file is also saved as pyODEIVPstage0original.pyf for keeping history
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\tiny\ttfamily},breaklines=true,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+This module 'pyODEIVPstage0' is auto-generated with f2py (version:2).
+\end_layout
+
+\begin_layout Plain Layout
+
+Functions:
+\end_layout
+
+\begin_layout Plain Layout
+
+  dx = fdxsample1(t,x,u,px,nx=len(x),nu=len(u),npx=len(px))
+\end_layout
+
+\begin_layout Plain Layout
+
+  dx = fdxsample2(t,x,u,px,nx=len(x),nu=len(u),npx=len(px))
+\end_layout
+
+\begin_layout Plain Layout
+
+  dx = statederivative(t,x,fu,fdx,px,pu,nu,nx=len(x),npx=len(px),npu=len(pu),fu_
+extra_args=(),fdx_extra_args=())
+\end_layout
+
+\begin_layout Plain Layout
+
+  xv,yv = eulerintegration(fdx,fu,fy,x0,tv,px,pu,py,nu,ny,nx=len(x0),npx=len(px)
+,npu=len(pu),npy=len(py),nt=len(tv),fdx_extra_args=(),fu_extra_args=(),fy_extra_
+args=())
+\end_layout
+
+\begin_layout Plain Layout
+
+  xv,yv = rk4(fdx,fu,fy,x0,tv,px,pu,py,nu,ny,nx=len(x0),npx=len(px),npu=len(pu),
+npy=len(py),nt=len(tv),fdx_extra_args=(),fu_extra_args=(),fy_extra_args=())
+\end_layout
+
+\begin_layout Plain Layout
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+xv,yv = eulerintegration(fdx,fu,fy,x0,tv,px,pu,py,nu,ny,[nx,npx,npu,npy,nt,fdx_e
+xtra_args,fu_extra_args,fy_extra_args])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Wrapper for ``eulerintegration``.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+fu : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+fy : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+x0 : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+tv : input rank-1 array('f') with bounds (nt)
+\end_layout
+
+\begin_layout Plain Layout
+
+px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+py : input rank-1 array('f') with bounds (npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+nu : input int
+\end_layout
+
+\begin_layout Plain Layout
+
+ny : input int
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Other Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------------
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+fu_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+fy_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x0)
+\end_layout
+
+\begin_layout Plain Layout
+
+npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+npy : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+nt : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(tv)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Returns
+\end_layout
+
+\begin_layout Plain Layout
+
+-------
+\end_layout
+
+\begin_layout Plain Layout
+
+xv : rank-2 array('f') with bounds (nt,nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+yv : rank-2 array('f') with bounds (nt,ny)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Notes
+\end_layout
+
+\begin_layout Plain Layout
+
+-----
+\end_layout
+
+\begin_layout Plain Layout
+
+Call-back functions::
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fdx(t,x,u,px,dx,[nx,nu,npx]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fu(t,x,u,pu,[nx,nu,npu]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fy(t,x,dx,u,y,px,pu,py,[nx,nu,ny,npx,npu,npy]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    y : input rank-1 array('f') with bounds (ny)
+\end_layout
+
+\begin_layout Plain Layout
+
+    px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    py : input rank-1 array('f') with bounds (npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    ny : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(y)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npy : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+xv,yv = rk4(fdx,fu,fy,x0,tv,px,pu,py,nu,ny,[nx,npx,npu,npy,nt,fdx_extra_args,fu_
+extra_args,fy_extra_args])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Wrapper for ``rk4``.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+fu : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+fy : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+x0 : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+tv : input rank-1 array('f') with bounds (nt)
+\end_layout
+
+\begin_layout Plain Layout
+
+px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+py : input rank-1 array('f') with bounds (npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+nu : input int
+\end_layout
+
+\begin_layout Plain Layout
+
+ny : input int
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Other Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------------
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+fu_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+fy_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x0)
+\end_layout
+
+\begin_layout Plain Layout
+
+npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+npy : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+nt : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(tv)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Returns
+\end_layout
+
+\begin_layout Plain Layout
+
+-------
+\end_layout
+
+\begin_layout Plain Layout
+
+xv : rank-2 array('f') with bounds (nt,nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+yv : rank-2 array('f') with bounds (nt,ny)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Notes
+\end_layout
+
+\begin_layout Plain Layout
+
+-----
+\end_layout
+
+\begin_layout Plain Layout
+
+Call-back functions::
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fdx(t,x,u,px,dx,[nx,nu,npx]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fu(t,x,u,pu,[nx,nu,npu]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fy(t,x,dx,u,y,px,pu,py,[nx,nu,ny,npx,npu,npy]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    y : input rank-1 array('f') with bounds (ny)
+\end_layout
+
+\begin_layout Plain Layout
+
+    px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    py : input rank-1 array('f') with bounds (npy)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    ny : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(y)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npy : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(py)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+--------------------
+\end_layout
+
+\begin_layout Plain Layout
+
+dx = statederivative(t,x,fu,fdx,px,pu,nu,[nx,npx,npu,fu_extra_args,fdx_extra_arg
+s])
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Wrapper for ``statederivative``.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------
+\end_layout
+
+\begin_layout Plain Layout
+
+t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+fu : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx : call-back function
+\end_layout
+
+\begin_layout Plain Layout
+
+px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+nu : input int
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Other Parameters
+\end_layout
+
+\begin_layout Plain Layout
+
+----------------
+\end_layout
+
+\begin_layout Plain Layout
+
+fu_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+fdx_extra_args : input tuple, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: ()
+\end_layout
+
+\begin_layout Plain Layout
+
+nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Returns
+\end_layout
+
+\begin_layout Plain Layout
+
+-------
+\end_layout
+
+\begin_layout Plain Layout
+
+dx : rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Notes
+\end_layout
+
+\begin_layout Plain Layout
+
+-----
+\end_layout
+
+\begin_layout Plain Layout
+
+Call-back functions::
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fu(t,x,u,pu,[nx,nu,npu]): return 
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    pu : input rank-1 array('f') with bounds (npu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(pu)
+\end_layout
+
+\begin_layout Plain Layout
+
+  def fdx(t,x,u,px,[nx,nu,npx]): return dx
+\end_layout
+
+\begin_layout Plain Layout
+
+  Required arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    t : input float
+\end_layout
+
+\begin_layout Plain Layout
+
+    x : input rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+    u : input rank-1 array('f') with bounds (nu)
+\end_layout
+
+\begin_layout Plain Layout
+
+    px : input rank-1 array('f') with bounds (npx)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Optional arguments:
+\end_layout
+
+\begin_layout Plain Layout
+
+    nx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+    nu : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(u)
+\end_layout
+
+\begin_layout Plain Layout
+
+    npx : input int, optional
+\end_layout
+
+\begin_layout Plain Layout
+
+    Default: len(px)
+\end_layout
+
+\begin_layout Plain Layout
+
+  Return objects:
+\end_layout
+
+\begin_layout Plain Layout
+
+    dx : rank-1 array('f') with bounds (nx)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
