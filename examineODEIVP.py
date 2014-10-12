@@ -100,6 +100,7 @@ if plotsOn:
     pl.plot(xv_RK[:,0],xv_RK[:,1],'g')
     pl.legend(("F2PY-python-Euler","F2PY-python-RungeKutta-4"))
     pl.savefig('phaseSpace_Euler_RK.pdf')
+    pl.savefig('phaseSpace_Euler_RK.png')
     
     
     pl.figure(figsize=(8,8))
@@ -107,12 +108,15 @@ if plotsOn:
             t,xv_RK[:,0],'b:',t,xv_RK[:,1],'g:')
     pl.legend(('$x_1$ Euler','$x_2$ Euler','$x_1$ RK','$x_2$ RK'))    
     pl.savefig('timeHistory_Euler_RK.pdf')
+    pl.savefig('timeHistory_Euler_RK.png')
     
 if plotsOn:
     pl.figure(figsize=(8,8))
     pl.plot(t, xv_Euler[:,0], t, xv_RK[:,0])
     pl.savefig('timeHistory1stState_Euler_RK.pdf')
+    pl.savefig('timeHistory1stState_Euler_RK.png')
     
     pl.figure(figsize=(8,8))
     pl.plot(t, xv_Euler[:,1], t, xv_RK[:,1])
     pl.savefig('timeHistory2ndtState_Euler_RK.pdf')
+    pl.savefig('timeHistory2ndtState_Euler_RK.png')
