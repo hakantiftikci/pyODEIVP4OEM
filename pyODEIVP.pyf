@@ -3,7 +3,7 @@
 
 python module statederivative__user__routines 
     interface statederivative_user_interface 
-        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
+        subroutine derivative(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
             real intent(in) :: t
             real dimension(nx),intent(in) :: x
             real dimension(nu) :: u
@@ -12,16 +12,32 @@ python module statederivative__user__routines
             integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
             integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
             integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
-        end subroutine fdx
-        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
+        end subroutine derivative
+        subroutine input(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
             real intent(in) :: t
             real dimension(nx),intent(in) :: x
-            real dimension(nu) :: u
+            real dimension(nu),intent(out) :: u
             real dimension(npu),intent(in) :: pu
             integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
             integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
             integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
-        end subroutine fu
+        end subroutine input
+        subroutine output(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy) ! in :pyODEIVP:ODEIVP.f90:rk4:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nx),depend(nx) :: dx
+            real dimension(nu),intent(in) :: u
+            real dimension(ny),intent(out) :: y
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            real dimension(npy),intent(in) :: py
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) :: ny=len(y)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+            integer, optional,intent(in),check(len(py)>=npy),depend(py) :: npy=len(py)
+        end subroutine output        
     end interface statederivative_user_interface
 end python module statederivative__user__routines
 python module eulerintegration__user__routines 
@@ -125,7 +141,7 @@ python module pyODEIVP ! in
             integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
         end subroutine fdxsample2
         subroutine statederivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu) ! in :pyODEIVP:ODEIVP.f90
-            use statederivative__user__routines
+            use statederivative__user__routines, fu => input, fdx => derivative
             real intent(in) :: t
             real dimension(nx),intent(in) :: x
             real dimension(nx),intent(out),depend(nx) :: dx
@@ -139,7 +155,7 @@ python module pyODEIVP ! in
             integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
         end subroutine statederivative
         subroutine eulerintegration(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt) ! in :pyODEIVP:ODEIVP.f90
-            use eulerintegration__user__routines
+            use statederivative__user__routines, fdx => derivative, fu => input, fy => output
             external fdx
             external fu
             external fy
@@ -159,7 +175,7 @@ python module pyODEIVP ! in
             integer, optional,intent(in),check(len(tv)>=nt),depend(tv) :: nt=len(tv)
         end subroutine eulerintegration
         subroutine rk4(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt) ! in :pyODEIVP:ODEIVP.f90
-            use rk4__user__routines
+            use statederivative__user__routines, fdx => derivative, fu => input, fy => output
             external fdx
             external fu
             external fy
