@@ -1,0 +1,185 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module statederivative__user__routines 
+    interface statederivative_user_interface 
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu) :: u
+            real dimension(npx),intent(in) :: px
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+        end subroutine fdx
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:statederivative:unknown_interface
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu) :: u
+            real dimension(npu),intent(in) :: pu
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+        end subroutine fu
+    end interface statederivative_user_interface
+end python module statederivative__user__routines
+python module eulerintegration__user__routines 
+    interface eulerintegration_user_interface 
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:eulerintegration:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nu) :: u
+            real dimension(npx),intent(in) :: px
+            real dimension(nx),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+        end subroutine fdx
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:eulerintegration:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nu) :: u
+            real dimension(npu),intent(in) :: pu
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+        end subroutine fu
+        subroutine fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy) ! in :pyODEIVP:ODEIVP.f90:eulerintegration:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nx),depend(nx) :: dx
+            real dimension(nu) :: u
+            real dimension(ny) :: y
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            real dimension(npy),intent(in) :: py
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) :: ny=len(y)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+            integer, optional,intent(in),check(len(py)>=npy),depend(py) :: npy=len(py)
+        end subroutine fy
+    end interface eulerintegration_user_interface
+end python module eulerintegration__user__routines
+python module rk4__user__routines 
+    interface rk4_user_interface 
+        subroutine fdx(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90:rk4:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nu) :: u
+            real dimension(npx),intent(in) :: px
+            real dimension(nx),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+        end subroutine fdx
+        subroutine fu(t,x,u,pu,nx,nu,npu) ! in :pyODEIVP:ODEIVP.f90:rk4:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nu) :: u
+            real dimension(npu),intent(in) :: pu
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+        end subroutine fu
+        subroutine fy(t,x,dx,u,y,px,pu,py,nx,nu,ny,npx,npu,npy) ! in :pyODEIVP:ODEIVP.f90:rk4:unknown_interface
+            real :: t
+            real dimension(nx) :: x
+            real dimension(nx),depend(nx) :: dx
+            real dimension(nu) :: u
+            real dimension(ny) :: y
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            real dimension(npy),intent(in) :: py
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) :: ny=len(y)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+            integer, optional,intent(in),check(len(py)>=npy),depend(py) :: npy=len(py)
+        end subroutine fy
+    end interface rk4_user_interface
+end python module rk4__user__routines
+python module pyODEIVP ! in 
+    interface  ! in :pyODEIVP
+        subroutine fdxsample1(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(npx),intent(in) :: px
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+        end subroutine fdxsample1
+        subroutine fdxsample2(t,x,u,px,dx,nx,nu,npx) ! in :pyODEIVP:ODEIVP.f90
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(npx),intent(in) :: px
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+        end subroutine fdxsample2
+        subroutine statederivative(t,x,dx,fu,fdx,px,pu,nx,nu,npx,npu) ! in :pyODEIVP:ODEIVP.f90
+            use statederivative__user__routines
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nx),intent(out),depend(nx) :: dx
+            external fu
+            external fdx
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer intent(in) :: nu
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+        end subroutine statederivative
+        subroutine eulerintegration(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt) ! in :pyODEIVP:ODEIVP.f90
+            use eulerintegration__user__routines
+            external fdx
+            external fu
+            external fy
+            real dimension(nx),intent(in) :: x0
+            real dimension(nt),intent(in) :: tv
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            real dimension(npy),intent(in) :: py
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) :: nx=len(x0)
+            integer intent(in) :: nu
+            integer intent(in) :: ny
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+            integer, optional,intent(in),check(len(py)>=npy),depend(py) :: npy=len(py)
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) :: nt=len(tv)
+        end subroutine eulerintegration
+        subroutine rk4(fdx,fu,fy,x0,tv,xv,yv,px,pu,py,nx,nu,ny,npx,npu,npy,nt) ! in :pyODEIVP:ODEIVP.f90
+            use rk4__user__routines
+            external fdx
+            external fu
+            external fy
+            real dimension(nx),intent(in) :: x0
+            real dimension(nt),intent(in) :: tv
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+            real dimension(npx),intent(in) :: px
+            real dimension(npu),intent(in) :: pu
+            real dimension(npy),intent(in) :: py
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) :: nx=len(x0)
+            integer intent(in) :: nu
+            integer intent(in) :: ny
+            integer, optional,intent(in),check(len(px)>=npx),depend(px) :: npx=len(px)
+            integer, optional,intent(in),check(len(pu)>=npu),depend(pu) :: npu=len(pu)
+            integer, optional,intent(in),check(len(py)>=npy),depend(py) :: npy=len(py)
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) :: nt=len(tv)
+        end subroutine rk4
+    end interface 
+end python module pyODEIVP
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
