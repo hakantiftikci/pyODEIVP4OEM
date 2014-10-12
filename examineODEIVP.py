@@ -5,7 +5,7 @@ Created on Sat Oct 11 17:59:12 2014
 @author: hakan
 """
 
-import pyODEIVPstage0 as ode
+import pyODEIVP as ode
 import numpy as np
 import pylab as pl
 
