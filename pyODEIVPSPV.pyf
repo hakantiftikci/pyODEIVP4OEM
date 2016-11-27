@@ -1,0 +1,109 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module statederivative__user__routines 
+    interface statederivative_user_interface 
+        subroutine derivative(t,x,u,p,dx,nx,nu,np) ! in :pyODEIVPSPV:ODEIVPSPV.f90:statederivative:unknown_interface
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(np),intent(in) :: p
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+        end subroutine derivative
+        subroutine input(t,x,p,u,nx,nu,np) ! in :pyODEIVPSPV:ODEIVPSPV.f90:statederivative:unknown_interface
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(np),intent(in) :: p
+            real dimension(nu),intent(out) :: u
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+        end subroutine input
+        subroutine output(t,x,u,p,dx,y,nx,nu,np,ny) ! in :pyODEIVPSPV:ODEIVPSPV.f90:eulerintegration:unknown_interface
+            real :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(np),intent(in) :: p
+            real dimension(nx),depend(nx) :: dx
+            real dimension(ny),intent(out) :: y
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+            integer, optional,intent(in),check(len(y)>=ny),depend(y) :: ny=len(y)
+        end subroutine output
+    end interface statederivative_user_interface
+end python module statederivative__user__routines
+python module pyODEIVPSPV ! in 
+    interface  ! in :pyODEIVPSPV
+        subroutine fdxsample1(t,x,u,p,dx,nx,nu,np) ! in :pyODEIVPSPV:ODEIVPSPV.f90
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(np),intent(in) :: p
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+        end subroutine fdxsample1
+        subroutine fdxsample2(t,x,u,p,dx,nx,nu,np) ! in :pyODEIVPSPV:ODEIVPSPV.f90
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(nu),intent(in) :: u
+            real dimension(np),intent(in) :: p
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer, optional,intent(in),check(len(u)>=nu),depend(u) :: nu=len(u)
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+        end subroutine fdxsample2
+        subroutine statederivative(t,x,p,fu,fdx,dx,nx,nu,np) ! in :pyODEIVPSPV:ODEIVPSPV.f90
+            use statederivative__user__routines, fdx => derivative, fu => input
+            real intent(in) :: t
+            real dimension(nx),intent(in) :: x
+            real dimension(np),intent(in) :: p
+            external fu
+            external fdx
+            real dimension(nx),intent(out),depend(nx) :: dx
+            integer, optional,intent(in),check(len(x)>=nx),depend(x) :: nx=len(x)
+            integer intent(in) :: nu
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+        end subroutine statederivative
+        subroutine eulerintegration(fdx,fu,fy,x0,tv,xv,yv,p,nx,nu,ny,np,nt) ! in :pyODEIVPSPV:ODEIVPSPV.f90
+            use statederivative__user__routines, fdx => derivative, fu => input, fy => output
+            external fdx
+            external fu
+            external fy
+            real dimension(nx),intent(in) :: x0
+            real dimension(nt),intent(in) :: tv
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+            real dimension(np),intent(in) :: p
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) :: nx=len(x0)
+            integer intent(in) :: nu
+            integer intent(in) :: ny
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) :: nt=len(tv)
+        end subroutine eulerintegration
+        subroutine rk4(fdx,fu,fy,x0,tv,xv,yv,p,nx,nu,ny,np,nt) ! in :pyODEIVPSPV:ODEIVPSPV.f90
+            use statederivative__user__routines, fdx => derivative, fu => input, fy => output
+            external fdx
+            external fu
+            external fy
+            real dimension(nx),intent(in) :: x0
+            real dimension(nt),intent(in) :: tv
+            real dimension(nt,nx),intent(out),depend(nt,nx) :: xv
+            real dimension(nt,ny),intent(out),depend(nt,ny) :: yv
+            real dimension(np),intent(in) :: p
+            integer, optional,intent(in),check(len(x0)>=nx),depend(x0) :: nx=len(x0)
+            integer intent(in) :: nu
+            integer intent(in) :: ny
+            integer, optional,intent(in),check(len(p)>=np),depend(p) :: np=len(p)
+            integer, optional,intent(in),check(len(tv)>=nt),depend(tv) :: nt=len(tv)
+        end subroutine rk4
+    end interface 
+end python module pyODEIVPSPV
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
